@@ -35,3 +35,13 @@ export enum QueueControlMessageType {
   SORT = "SORT",
   FIFO = "FIFO",
 }
+
+export enum JunctionType {
+  INPUT = "INPUT",
+  OUTPUT = "OUTPUT",
+}
+
+export enum JunctionMediatorNotification {
+  ACCEPT_INPUT_PIPE = "ACCEPT_INPUT_PIPE",
+  ACCEPT_OUTPUT_PIPE = "ACCEPT_OUTPUT_PIPE",
+}

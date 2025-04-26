@@ -1,0 +1,41 @@
+import { PipeListenerCallback, IPipeFitting, PipeMessage } from "../types";
+
+/**
+ * Pipe Listener.
+ *
+ * Allows a class that does not implement `IPipeFitting` to
+ * be the final recipient of the messages in a pipeline.
+ *
+ * @see Junction
+ */
+export class PipeListener implements IPipeFitting {
+  protected callback: PipeListenerCallback;
+
+  constructor(callback: PipeListenerCallback) {
+    this.callback = callback;
+  }
+
+  /**
+   * Can't connect anything beyond this.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public connect(output: IPipeFitting): boolean {
+    return false;
+  }
+
+  /**
+   * Can't disconnect anything, either.
+   */
+  public disconnect(): IPipeFitting | null {
+    return null;
+  }
+
+  /**
+   * Write the message to the listener.
+   * @param message
+   */
+  public write(message: PipeMessage): boolean {
+    this.callback(message);
+    return true;
+  }
+}

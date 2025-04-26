@@ -3,7 +3,7 @@ import { IPipeFitting, PipeMessage } from "../types";
 /**
  * Pipe.
  *
- * This is the most basic <code>IPipeFitting</code>,
+ * This is the most basic `IPipeFitting`,
  * simply allowing the connection of an output
  * fitting and writing of a message to that output.
  */

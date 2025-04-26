@@ -11,4 +11,10 @@ export {
   QueueControlMessage,
 } from "./message";
 
-export { IPipeFitting, IPipeAware } from "./pipe";
+export { IPipeFitting, IPipeAware, PipeListenerCallback } from "./pipe";
+
+export { Pipe } from "../plumbing/Pipe";
+export { Filter } from "../plumbing/Filter";
+export { Junction } from "../plumbing/Junction";
+export { JunctionMediator } from "../plumbing/JunctionMediator";
+export { PipeListener } from "../plumbing/PipeListener";

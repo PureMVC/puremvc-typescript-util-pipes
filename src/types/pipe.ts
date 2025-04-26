@@ -19,7 +19,7 @@ export interface IPipeFitting {
    * chain, as water typically flows one direction
    * through a physical pipes.ts.`
    *
-   * @return Boolean true if no other fitting was already connected.
+   * @return boolean true if no other fitting was already connected.
    */
   connect(output: IPipeFitting): boolean;
 
@@ -65,3 +65,17 @@ export interface IPipeAware {
   acceptInputPipe(name: string, pipe: IPipeFitting): void;
   acceptOutputPipe(name: string, pipe: IPipeFitting): void;
 }
+
+export type PipeListenerCallback = (message: PipeMessage) => void;
+
+export type FilterControlFunction = (message: PipeMessage) => boolean;
+
+/**
+ * Accept input pipe notification name constant.
+ */
+export const ACCEPT_INPUT_PIPE: string = "acceptInputPipe";
+
+/**
+ * Accept output pipe notification name constant.
+ */
+export const ACCEPT_OUTPUT_PIPE: string = "acceptOutputPipe";

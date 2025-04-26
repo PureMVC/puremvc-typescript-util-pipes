@@ -47,7 +47,10 @@ export interface PipeMessage {
  * through to its output unchanged.
  */
 export interface FilterControlMessage extends PipeMessage {
+  name: string;
   type: FilterControlMessageType;
+  filter: (message: PipeMessage) => boolean;
+  params?: object;
 }
 
 /**
