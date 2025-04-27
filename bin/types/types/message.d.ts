@@ -1,9 +1,4 @@
-import {
-  PipeMessageType,
-  FilterControlMessageType,
-  QueueControlMessageType,
-} from "./enum";
-
+import { PipeMessageType, FilterControlMessageType, QueueControlMessageType } from "./enum";
 /**
  * Pipe Message Interface.
  *
@@ -15,12 +10,11 @@ import {
  * the fittings.
  */
 export interface IPipeMessage {
-  type: PipeMessageType | FilterControlMessageType | QueueControlMessageType;
-  header?: object | undefined;
-  body?: object | undefined;
-  priority?: number | undefined;
+    type: PipeMessageType | FilterControlMessageType | QueueControlMessageType;
+    header?: object | undefined;
+    body?: object | undefined;
+    priority?: number | undefined;
 }
-
 /**
  * Filter Control Messages.
  *
@@ -47,12 +41,11 @@ export interface IPipeMessage {
  * through to its output unchanged.
  */
 export interface FilterControlMessage extends IPipeMessage {
-  name: string;
-  type: FilterControlMessageType;
-  filter: (message: IPipeMessage) => boolean;
-  params?: object;
+    name: string;
+    type: FilterControlMessageType;
+    filter: (message: IPipeMessage) => boolean;
+    params?: object;
 }
-
 /**
  * Queue Control Messages.
  *
@@ -79,5 +72,5 @@ export interface FilterControlMessage extends IPipeMessage {
  * upon by the first queue only.
  */
 export interface QueueControlMessage extends IPipeMessage {
-  type: QueueControlMessageType;
+    type: QueueControlMessageType;
 }

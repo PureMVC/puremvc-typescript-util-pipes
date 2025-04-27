@@ -6,6 +6,7 @@
     "declaration": true,
     "declarationDir": "bin/types",
     "esModuleInterop": true,
+    "isolatedModules": true,
     "skipLibCheck": true,
     "types": ["node","jest", "@puremvc/puremvc-typescript-multicore-framework"]
   },

@@ -1,4 +1,4 @@
-import { PipeListenerCallback, IPipeFitting, PipeMessage } from "../types";
+import { PipeListenerCallback, IPipeFitting, IPipeMessage } from "../index";
 
 /**
  * Pipe Listener.
@@ -34,7 +34,7 @@ export class PipeListener implements IPipeFitting {
    * Write the message to the listener.
    * @param message
    */
-  public write(message: PipeMessage): boolean {
+  public write(message: IPipeMessage): boolean {
     this.callback(message);
     return true;
   }

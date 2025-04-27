@@ -3,9 +3,9 @@ import {
   FilterControlMessage,
   FilterControlMessageType,
   IPipeFitting,
-  PipeMessage,
+  IPipeMessage,
   PipeMessageType,
-} from "../types";
+} from "../index";
 import { FilterControlFunction } from "../types/pipe";
 
 /**
@@ -75,8 +75,8 @@ export class Filter extends Pipe {
    *
    * @return boolean True if the filter process does not throw an error and subsequent operations in the pipeline succeed.
    */
-  public override write(message: PipeMessage): boolean {
-    let outputMessage: PipeMessage;
+  public override write(message: IPipeMessage): boolean {
+    let outputMessage: IPipeMessage;
     let success: boolean = true;
 
     // Filter normal messages
@@ -133,21 +133,21 @@ export class Filter extends Pipe {
   /**
    * Is the message directed at this filter instance?
    */
-  protected isTarget(message: PipeMessage): boolean {
+  protected isTarget(message: IPipeMessage): boolean {
     return (message as FilterControlMessage).name === this.name;
   }
 
   /**
    * Filter the message.
    */
-  protected applyFilter(message: PipeMessage): PipeMessage {
+  protected applyFilter(message: IPipeMessage): IPipeMessage {
     this.filter(message, this.params);
     return message;
   }
 
   protected mode: string = FilterControlMessageType.FILTER;
   protected filter: (
-    message: PipeMessage,
+    message: IPipeMessage,
     params: object | undefined,
   ) => boolean;
   protected params: object | undefined = undefined;

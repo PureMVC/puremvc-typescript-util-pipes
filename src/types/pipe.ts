@@ -1,4 +1,4 @@
-import { PipeMessage } from "./message";
+import { IPipeMessage } from "./message";
 
 /**
  * Pipe Fitting Interface.
@@ -51,7 +51,7 @@ export interface IPipeFitting {
    * wrote into the pipes.ts can take action, such as
    * rolling back changes.`
    */
-  write(message: PipeMessage): boolean;
+  write(message: IPipeMessage): boolean;
 }
 
 /**
@@ -66,9 +66,15 @@ export interface IPipeAware {
   acceptOutputPipe(name: string, pipe: IPipeFitting): void;
 }
 
-export type PipeListenerCallback = (message: PipeMessage) => void;
+/**
+ * The PipeListener callback function
+ */
+export type PipeListenerCallback = (message: IPipeMessage) => void;
 
-export type FilterControlFunction = (message: PipeMessage) => boolean;
+/**
+ * The Filter Control function
+ */
+export type FilterControlFunction = (message: IPipeMessage) => boolean;
 
 /**
  * Accept input pipe notification name constant.

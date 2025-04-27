@@ -1,4 +1,4 @@
-import { IPipeFitting, PipeMessage } from "../types";
+import { IPipeFitting, IPipeMessage } from "../index";
 
 /**
  * Pipe.
@@ -10,8 +10,8 @@ import { IPipeFitting, PipeMessage } from "../types";
 export class Pipe implements IPipeFitting {
   protected output: IPipeFitting | null = null;
 
-  constructor(output: IPipeFitting) {
-    this.connect(output);
+  constructor(output: IPipeFitting | null) {
+    if (output) this.connect(output);
   }
 
   /**
@@ -55,7 +55,7 @@ export class Pipe implements IPipeFitting {
    * @param message the message to write
    * @return boolean whether any connected down-pipe outputs failed
    */
-  public write(message: PipeMessage): boolean {
+  public write(message: IPipeMessage): boolean {
     return this.output?.write(message) || false;
   }
 }

@@ -3,7 +3,7 @@ import {
   Mediator,
 } from "@puremvc/puremvc-typescript-multicore-framework";
 import { JunctionMediatorNotification, JunctionType } from "../types/enum";
-import { IPipeFitting, PipeMessage } from "../types";
+import { IPipeFitting, IPipeMessage } from "../index";
 import { Junction } from "./Junction";
 
 /**
@@ -61,7 +61,7 @@ export abstract class JunctionMediator extends Mediator {
         )
           this.junction.addPipeListener(
             inputPipeName as string,
-            (message: PipeMessage) => this.handlePipeMessage(message),
+            (message: IPipeMessage) => this.handlePipeMessage(message),
           );
         break;
 
@@ -83,7 +83,7 @@ export abstract class JunctionMediator extends Mediator {
    *
    * Override in subclass and handle messages appropriately for the module.
    */
-	public abstract handlePipeMessage( message: PipeMessage ): void;
+  public abstract handlePipeMessage(message: IPipeMessage): void;
 
   /**
    * The Junction for this Module.

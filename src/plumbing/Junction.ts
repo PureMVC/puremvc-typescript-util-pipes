@@ -2,8 +2,8 @@ import {
   IPipeFitting,
   PipeListener,
   PipeListenerCallback,
-  PipeMessage,
-} from "../types";
+  IPipeMessage,
+} from "../index";
 import { JunctionType } from "../types/enum";
 
 /**
@@ -179,7 +179,7 @@ export class Junction {
    * @param outputPipeName the OUTPUT pipe to send the message on
    * @param message the PipeMessage to send
    */
-  public sendMessage(outputPipeName: string, message: PipeMessage): boolean {
+  public sendMessage(outputPipeName: string, message: IPipeMessage): boolean {
     let success: boolean = false;
     if (this.hasOutputPipe(outputPipeName)) {
       let pipe: IPipeFitting | undefined = this.pipesMap.get(outputPipeName);
@@ -208,6 +208,7 @@ export class Junction {
 
   /**
    * The map of pipe names to their types
+   * @type {Map<string, JunctionType.INPUT | JunctionType.OUTPUT>}
    */
   protected pipeTypesMap: Map<
     string,

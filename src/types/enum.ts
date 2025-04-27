@@ -36,11 +36,17 @@ export enum QueueControlMessageType {
   FIFO = "FIFO",
 }
 
+/**
+ * The valid Junction types
+ */
 export enum JunctionType {
   INPUT = "INPUT",
   OUTPUT = "OUTPUT",
 }
 
+/**
+ * The valid Junction Mediator Notifications
+ */
 export enum JunctionMediatorNotification {
   ACCEPT_INPUT_PIPE = "ACCEPT_INPUT_PIPE",
   ACCEPT_OUTPUT_PIPE = "ACCEPT_OUTPUT_PIPE",
