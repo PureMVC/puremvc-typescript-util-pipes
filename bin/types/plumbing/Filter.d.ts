@@ -1,6 +1,4 @@
-import { Pipe } from "./Pipe";
-import { IPipeFitting, IPipeMessage } from "../index";
-import { FilterControlFunction } from "../types/pipe";
+import { FilterControlFunction, IPipeFitting, IPipeMessage, PropBag, Pipe } from "../types";
 /**
  * Pipe Filter.
  *
@@ -16,10 +14,10 @@ export declare class Filter extends Pipe {
      * Optionally connect the output and set the parameters.
      */
     constructor({ name, output, filter, params, }: {
-        name: string;
-        output: IPipeFitting;
-        filter: FilterControlFunction;
-        params?: object | undefined;
+        name?: string;
+        output?: IPipeFitting;
+        filter?: FilterControlFunction;
+        params?: PropBag | undefined;
     });
     /**
      * Handle the incoming message.
@@ -67,7 +65,7 @@ export declare class Filter extends Pipe {
      */
     protected applyFilter(message: IPipeMessage): IPipeMessage;
     protected mode: string;
-    protected filter: (message: IPipeMessage, params: object | undefined) => boolean;
-    protected params: object | undefined;
+    protected filter: FilterControlFunction | undefined;
+    protected params: PropBag;
     protected name: string;
 }

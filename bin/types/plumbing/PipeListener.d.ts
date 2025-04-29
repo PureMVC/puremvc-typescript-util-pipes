@@ -1,4 +1,4 @@
-import { PipeListenerCallback, IPipeFitting, IPipeMessage } from "../index";
+import { IPipeFitting, IPipeMessage, PipeListenerCallback } from "../types";
 /**
  * Pipe Listener.
  *
@@ -17,7 +17,7 @@ export declare class PipeListener implements IPipeFitting {
     /**
      * Can't disconnect anything, either.
      */
-    disconnect(): IPipeFitting | null;
+    disconnect(): IPipeFitting | undefined;
     /**
      * Write the message to the listener.
      * @param message

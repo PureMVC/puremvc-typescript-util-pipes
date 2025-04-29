@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Queue = void 0;
-const index_1 = require("../index");
+const types_1 = require("../types");
 /**
  * Pipe Queue.
  *
@@ -19,10 +19,10 @@ const index_1 = require("../index");
  * use, and so having to name them would make their operation
  * more complex than need be.
  */
-class Queue extends index_1.Pipe {
+class Queue extends types_1.Pipe {
     constructor(output) {
         super(output);
-        this.mode = index_1.QueueControlMessageType.SORT;
+        this.mode = types_1.QueueControlMessageType.SORT;
         this.messages = new Array();
     }
     /**
@@ -46,19 +46,19 @@ class Queue extends index_1.Pipe {
         let success = true;
         switch (message.type) {
             // Store normal messages
-            case index_1.PipeMessageType.NORMAL:
+            case types_1.PipeMessageType.NORMAL:
                 this.store(message);
                 break;
             // Flush the queue
-            case index_1.QueueControlMessageType.FLUSH:
+            case types_1.QueueControlMessageType.FLUSH:
                 success = this.flush();
                 break;
             // Put Queue into Priority Sort or FIFO mode
             // Subsequent messages written to the queue
             // will be affected. Sorted messages cannot
             // be put back into FIFO order!
-            case index_1.QueueControlMessageType.SORT:
-            case index_1.QueueControlMessageType.FIFO:
+            case types_1.QueueControlMessageType.SORT:
+            case types_1.QueueControlMessageType.FIFO:
                 this.mode = message.type;
                 break;
         }
@@ -71,7 +71,7 @@ class Queue extends index_1.Pipe {
      */
     store(message) {
         this.messages.push(message);
-        if (this.mode === index_1.QueueControlMessageType.SORT)
+        if (this.mode === types_1.QueueControlMessageType.SORT)
             this.messages.sort(this.sortMessagesByPriority);
     }
     /**

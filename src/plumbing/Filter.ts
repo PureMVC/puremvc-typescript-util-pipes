@@ -1,12 +1,13 @@
-import { Pipe } from "./Pipe";
 import {
   FilterControlMessage,
   FilterControlMessageType,
+  FilterControlFunction,
   IPipeFitting,
   IPipeMessage,
   PipeMessageType,
-} from "../index";
-import { FilterControlFunction } from "../types/pipe";
+  PropBag,
+  Pipe
+} from "../types";
 
 /**
  * Pipe Filter.
@@ -28,15 +29,15 @@ export class Filter extends Pipe {
     filter,
     params,
   }: {
-    name: string;
-    output: IPipeFitting;
-    filter: FilterControlFunction;
-    params?: object | undefined;
+    name?: string;
+    output?: IPipeFitting;
+    filter?: FilterControlFunction;
+    params?: PropBag | undefined;
   }) {
     super(output);
-    this.name = name;
-    this.filter = filter;
-    this.params = params;
+    if (name) this.name = name;
+    if (filter) this.filter = filter;
+    if (params) this.params = params;
   }
 
   /**
@@ -98,7 +99,7 @@ export class Filter extends Pipe {
       // Accept parameters from control message
       case FilterControlMessageType.SET_PARAMS:
         if (this.isTarget(message)) {
-          this.params = (message as FilterControlMessage).params;
+          this.params = (message as FilterControlMessage).params || {};
         } else {
           success = this.output?.write(message) || false;
         }
@@ -141,15 +142,12 @@ export class Filter extends Pipe {
    * Filter the message.
    */
   protected applyFilter(message: IPipeMessage): IPipeMessage {
-    this.filter(message, this.params);
+    if (this.mode !== FilterControlMessageType.BYPASS && this.filter) this.filter(message, this.params);
     return message;
   }
 
   protected mode: string = FilterControlMessageType.FILTER;
-  protected filter: (
-    message: IPipeMessage,
-    params: object | undefined,
-  ) => boolean;
-  protected params: object | undefined = undefined;
-  protected name: string;
+  protected filter: FilterControlFunction | undefined = undefined;
+  protected params: PropBag = {};
+  protected name: string = "Unnamed Filter";
 }

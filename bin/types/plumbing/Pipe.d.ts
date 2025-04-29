@@ -1,4 +1,4 @@
-import { IPipeFitting, IPipeMessage } from "../index";
+import { IPipeFitting, IPipeMessage } from "../types";
 /**
  * Pipe.
  *
@@ -7,8 +7,8 @@ import { IPipeFitting, IPipeMessage } from "../index";
  * fitting and writing of a message to that output.
  */
 export declare class Pipe implements IPipeFitting {
-    protected output: IPipeFitting | null;
-    constructor(output: IPipeFitting | null);
+    protected output: IPipeFitting | undefined;
+    constructor(output?: IPipeFitting);
     /**
      * Connect another PipeFitting to the output.
      *
@@ -30,7 +30,7 @@ export declare class Pipe implements IPipeFitting {
      *
      * @return IPipeFitting the now disconnected output fitting
      */
-    disconnect(): IPipeFitting | null;
+    disconnect(): IPipeFitting | undefined;
     /**
      * Write the message to the connected output.
      *

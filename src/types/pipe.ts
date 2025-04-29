@@ -35,7 +35,7 @@ export interface IPipeFitting {
    *
    * @return IPipeFitting the now disconnected output fitting
    */
-  disconnect(): IPipeFitting | null;
+  disconnect(): IPipeFitting | undefined;
 
   /**
    * Write the message to the output Pipe Fitting.
@@ -74,7 +74,12 @@ export type PipeListenerCallback = (message: IPipeMessage) => void;
 /**
  * The Filter Control function
  */
-export type FilterControlFunction = (message: IPipeMessage) => boolean;
+export type FilterControlFunction = (message: IPipeMessage, params: PropBag) => boolean;
+
+/**
+ * A bag of unknown properties, e
+ */
+export type PropBag = { [key: string]: unknown };
 
 /**
  * Accept input pipe notification name constant.

@@ -1,4 +1,4 @@
-import { IPipeFitting, Pipe, IPipeMessage } from "../index";
+import { Pipe, IPipeFitting, IPipeMessage } from "../types";
 /**
  * Pipe Queue.
  *
@@ -17,7 +17,7 @@ import { IPipeFitting, Pipe, IPipeMessage } from "../index";
  * more complex than need be.
  */
 export declare class Queue extends Pipe {
-    constructor(output: IPipeFitting);
+    constructor(output?: IPipeFitting);
     /**
      * Handle the incoming message.
      *

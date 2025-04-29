@@ -1,4 +1,4 @@
-import { PipeListenerCallback, IPipeFitting, IPipeMessage } from "../index";
+import { IPipeFitting, IPipeMessage, PipeListenerCallback } from "../types";
 
 /**
  * Pipe Listener.
@@ -26,8 +26,8 @@ export class PipeListener implements IPipeFitting {
   /**
    * Can't disconnect anything, either.
    */
-  public disconnect(): IPipeFitting | null {
-    return null;
+  public disconnect(): IPipeFitting | undefined {
+    return undefined;
   }
 
   /**
@@ -35,7 +35,11 @@ export class PipeListener implements IPipeFitting {
    * @param message
    */
   public write(message: IPipeMessage): boolean {
-    this.callback(message);
-    return true;
+    let success = false;
+    if (this.callback !== undefined) {
+      this.callback(message);
+      success = true;
+    }
+    return success;
   }
 }

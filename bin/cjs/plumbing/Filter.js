@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Filter = void 0;
-const Pipe_1 = require("./Pipe");
-const index_1 = require("../index");
+const types_1 = require("../types");
 /**
  * Pipe Filter.
  *
@@ -11,7 +10,7 @@ const index_1 = require("../index");
  * filter function passed to them by control message, as well as having
  * their Bypass/Filter operation mode toggled via control message.
  */
-class Filter extends Pipe_1.Pipe {
+class Filter extends types_1.Pipe {
     /**
      * Constructor.
      *
@@ -19,11 +18,16 @@ class Filter extends Pipe_1.Pipe {
      */
     constructor({ name, output, filter, params, }) {
         super(output);
-        this.mode = index_1.FilterControlMessageType.FILTER;
-        this.params = undefined;
-        this.name = name;
-        this.filter = filter;
-        this.params = params;
+        this.mode = types_1.FilterControlMessageType.FILTER;
+        this.filter = undefined;
+        this.params = {};
+        this.name = "Unnamed Filter";
+        if (name)
+            this.name = name;
+        if (filter)
+            this.filter = filter;
+        if (params)
+            this.params = params;
     }
     /**
      * Handle the incoming message.
@@ -67,9 +71,9 @@ class Filter extends Pipe_1.Pipe {
         let success = true;
         // Filter normal messages
         switch (message.type) {
-            case index_1.PipeMessageType.NORMAL:
+            case types_1.PipeMessageType.NORMAL:
                 try {
-                    if (this.mode === index_1.FilterControlMessageType.FILTER) {
+                    if (this.mode === types_1.FilterControlMessageType.FILTER) {
                         outputMessage = this.applyFilter(message);
                     }
                     else {
@@ -83,16 +87,16 @@ class Filter extends Pipe_1.Pipe {
                 }
                 break;
             // Accept parameters from control message
-            case index_1.FilterControlMessageType.SET_PARAMS:
+            case types_1.FilterControlMessageType.SET_PARAMS:
                 if (this.isTarget(message)) {
-                    this.params = message.params;
+                    this.params = message.params || {};
                 }
                 else {
                     success = ((_b = this.output) === null || _b === void 0 ? void 0 : _b.write(message)) || false;
                 }
                 break;
             // Accept filter function from control message
-            case index_1.FilterControlMessageType.SET_FILTER:
+            case types_1.FilterControlMessageType.SET_FILTER:
                 if (this.isTarget(message)) {
                     this.filter = message.filter;
                 }
@@ -101,8 +105,8 @@ class Filter extends Pipe_1.Pipe {
                 }
                 break;
             // Toggle between Filter or Bypass operational modes
-            case index_1.FilterControlMessageType.BYPASS:
-            case index_1.FilterControlMessageType.FILTER:
+            case types_1.FilterControlMessageType.BYPASS:
+            case types_1.FilterControlMessageType.FILTER:
                 if (this.isTarget(message)) {
                     this.mode = message.type;
                 }
@@ -126,7 +130,8 @@ class Filter extends Pipe_1.Pipe {
      * Filter the message.
      */
     applyFilter(message) {
-        this.filter(message, this.params);
+        if (this.mode !== types_1.FilterControlMessageType.BYPASS && this.filter)
+            this.filter(message, this.params);
         return message;
     }
 }

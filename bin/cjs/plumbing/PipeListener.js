@@ -24,15 +24,19 @@ class PipeListener {
      * Can't disconnect anything, either.
      */
     disconnect() {
-        return null;
+        return undefined;
     }
     /**
      * Write the message to the listener.
      * @param message
      */
     write(message) {
-        this.callback(message);
-        return true;
+        let success = false;
+        if (this.callback !== undefined) {
+            this.callback(message);
+            success = true;
+        }
+        return success;
     }
 }
 exports.PipeListener = PipeListener;

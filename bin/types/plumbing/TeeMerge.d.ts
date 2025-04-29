@@ -1,5 +1,4 @@
-import { Pipe } from "./Pipe";
-import { IPipeFitting } from "../index";
+import { Pipe, IPipeFitting } from "../types";
 /**
  * Merging Pipe Tee.
  *

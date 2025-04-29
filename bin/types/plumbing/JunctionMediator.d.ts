@@ -1,6 +1,5 @@
 import { INotification, Mediator } from "@puremvc/puremvc-typescript-multicore-framework";
-import { IPipeMessage } from "../index";
-import { Junction } from "./Junction";
+import { Junction, IPipeMessage } from "../types";
 /**
  * Junction Mediator.
  *
@@ -10,7 +9,7 @@ export declare abstract class JunctionMediator extends Mediator {
     /**
      * Constructor.
      */
-    constructor(name: string, junction: Junction);
+    protected constructor(name: string, junction: Junction);
     /**
      * List Notification Interests.
      *

@@ -1,5 +1,4 @@
-import { PipeListener, } from "../index";
-import { JunctionType } from "../types/enum";
+import { PipeListener, JunctionType, } from "../types";
 /**
  * Pipe Junction.
  *

@@ -1,10 +1,10 @@
 import {
-  IPipeFitting,
   Pipe,
+  IPipeFitting,
   IPipeMessage,
   PipeMessageType,
   QueueControlMessageType,
-} from "../index";
+} from "../types";
 
 /**
  * Pipe Queue.
@@ -24,7 +24,7 @@ import {
  * more complex than need be.
  */
 export class Queue extends Pipe {
-  constructor(output: IPipeFitting) {
+  constructor(output?: IPipeFitting) {
     super(output);
   }
 

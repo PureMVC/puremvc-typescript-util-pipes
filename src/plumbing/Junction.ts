@@ -3,8 +3,8 @@ import {
   PipeListener,
   PipeListenerCallback,
   IPipeMessage,
-} from "../index";
-import { JunctionType } from "../types/enum";
+  JunctionType,
+} from "../types";
 
 /**
  * Pipe Junction.

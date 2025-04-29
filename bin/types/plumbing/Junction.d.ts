@@ -1,5 +1,4 @@
-import { IPipeFitting, PipeListenerCallback, IPipeMessage } from "../index";
-import { JunctionType } from "../types/enum";
+import { IPipeFitting, PipeListenerCallback, IPipeMessage, JunctionType } from "../types";
 /**
  * Pipe Junction.
  *

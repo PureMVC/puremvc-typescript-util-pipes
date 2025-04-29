@@ -1,10 +1,5 @@
-import {
-  INotification,
-  Mediator,
-} from "@puremvc/puremvc-typescript-multicore-framework";
-import { JunctionMediatorNotification, JunctionType } from "../types/enum";
-import { IPipeFitting, IPipeMessage } from "../index";
-import { Junction } from "./Junction";
+import { INotification, Mediator } from "@puremvc/puremvc-typescript-multicore-framework";
+import { Junction, JunctionMediatorNotification, JunctionType, IPipeFitting, IPipeMessage } from "../types";
 
 /**
  * Junction Mediator.
@@ -15,7 +10,7 @@ export abstract class JunctionMediator extends Mediator {
   /**
    * Constructor.
    */
-  constructor(name: string, junction: Junction) {
+  protected constructor(name: string, junction: Junction) {
     super(name, junction);
   }
 

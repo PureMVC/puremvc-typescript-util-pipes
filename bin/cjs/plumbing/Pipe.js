@@ -10,7 +10,7 @@ exports.Pipe = void 0;
  */
 class Pipe {
     constructor(output) {
-        this.output = null;
+        this.output = undefined;
         if (output)
             this.connect(output);
     }
@@ -24,7 +24,7 @@ class Pipe {
      */
     connect(output) {
         let success = false;
-        if (this.output === null) {
+        if (!this.output) {
             this.output = output;
             success = true;
         }
@@ -44,7 +44,7 @@ class Pipe {
      */
     disconnect() {
         let disconnectedFitting = this.output;
-        this.output = null;
+        this.output = undefined;
         return disconnectedFitting;
     }
     /**

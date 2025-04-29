@@ -1,5 +1,4 @@
-import { Pipe } from "./Pipe";
-import { FilterControlMessageType, PipeMessageType, } from "../index";
+import { FilterControlMessageType, PipeMessageType, Pipe } from "../types";
 /**
  * Pipe Filter.
  *
@@ -17,10 +16,15 @@ export class Filter extends Pipe {
     constructor({ name, output, filter, params, }) {
         super(output);
         this.mode = FilterControlMessageType.FILTER;
-        this.params = undefined;
-        this.name = name;
-        this.filter = filter;
-        this.params = params;
+        this.filter = undefined;
+        this.params = {};
+        this.name = "Unnamed Filter";
+        if (name)
+            this.name = name;
+        if (filter)
+            this.filter = filter;
+        if (params)
+            this.params = params;
     }
     /**
      * Handle the incoming message.
@@ -82,7 +86,7 @@ export class Filter extends Pipe {
             // Accept parameters from control message
             case FilterControlMessageType.SET_PARAMS:
                 if (this.isTarget(message)) {
-                    this.params = message.params;
+                    this.params = message.params || {};
                 }
                 else {
                     success = ((_b = this.output) === null || _b === void 0 ? void 0 : _b.write(message)) || false;
@@ -123,7 +127,8 @@ export class Filter extends Pipe {
      * Filter the message.
      */
     applyFilter(message) {
-        this.filter(message, this.params);
+        if (this.mode !== FilterControlMessageType.BYPASS && this.filter)
+            this.filter(message, this.params);
         return message;
     }
 }

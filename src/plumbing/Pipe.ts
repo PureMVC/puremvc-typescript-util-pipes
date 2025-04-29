@@ -1,4 +1,4 @@
-import { IPipeFitting, IPipeMessage } from "../index";
+import { IPipeFitting, IPipeMessage } from "../types";
 
 /**
  * Pipe.
@@ -8,9 +8,9 @@ import { IPipeFitting, IPipeMessage } from "../index";
  * fitting and writing of a message to that output.
  */
 export class Pipe implements IPipeFitting {
-  protected output: IPipeFitting | null = null;
+  protected output: IPipeFitting | undefined = undefined;
 
-  constructor(output: IPipeFitting | null) {
+  constructor(output?: IPipeFitting) {
     if (output) this.connect(output);
   }
 
@@ -24,7 +24,7 @@ export class Pipe implements IPipeFitting {
    */
   public connect(output: IPipeFitting): boolean {
     let success: boolean = false;
-    if (this.output === null) {
+    if (!this.output) {
       this.output = output;
       success = true;
     }
@@ -43,9 +43,9 @@ export class Pipe implements IPipeFitting {
    *
    * @return IPipeFitting the now disconnected output fitting
    */
-  public disconnect(): IPipeFitting | null {
+  public disconnect(): IPipeFitting | undefined {
     let disconnectedFitting = this.output;
-    this.output = null;
+    this.output = undefined;
     return disconnectedFitting;
   }
 

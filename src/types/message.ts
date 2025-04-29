@@ -16,8 +16,8 @@ import {
  */
 export interface IPipeMessage {
   type: PipeMessageType | FilterControlMessageType | QueueControlMessageType;
-  header?: object | undefined;
-  body?: object | undefined;
+  header?: { [key: string]: unknown } | undefined;
+  body?: { [key: string]: unknown } | undefined;
   priority?: number | undefined;
 }
 
@@ -49,8 +49,8 @@ export interface IPipeMessage {
 export interface FilterControlMessage extends IPipeMessage {
   name: string;
   type: FilterControlMessageType;
-  filter: (message: IPipeMessage) => boolean;
-  params?: object;
+  filter?: (message: IPipeMessage) => boolean;
+  params?: { [key: string]: unknown };
 }
 
 /**

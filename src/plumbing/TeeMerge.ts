@@ -1,5 +1,4 @@
-import { Pipe } from "./Pipe";
-import { IPipeFitting } from "../index";
+import { Pipe, IPipeFitting } from "../types";
 
 /**
  * Merging Pipe Tee.
@@ -20,7 +19,7 @@ export class TeeMerge extends Pipe {
    * `connect` method, as you would with any other IPipeFitting.
    */
   constructor(input1: IPipeFitting, input2: IPipeFitting) {
-    super(null);
+    super();
     if (input1) this.connectInput(input1);
     if (input2) this.connectInput(input2);
   }

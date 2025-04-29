@@ -1,4 +1,4 @@
-import { IPipeFitting, IPipeMessage } from "../index";
+import { IPipeFitting, IPipeMessage } from "../types";
 /**
  * Splitting Pipe Tee.
  *
