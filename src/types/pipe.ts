@@ -74,7 +74,10 @@ export type PipeListenerCallback = (message: IPipeMessage) => void;
 /**
  * The Filter Control function
  */
-export type FilterControlFunction = (message: IPipeMessage, params: PropBag) => boolean;
+export type FilterControlFunction = (
+  message: IPipeMessage,
+  params: PropBag,
+) => boolean;
 
 /**
  * A bag of unknown properties, e

@@ -6,7 +6,7 @@ import {
   IPipeMessage,
   PipeMessageType,
   PropBag,
-  Pipe
+  Pipe,
 } from "../types";
 
 /**
@@ -142,7 +142,8 @@ export class Filter extends Pipe {
    * Filter the message.
    */
   protected applyFilter(message: IPipeMessage): IPipeMessage {
-    if (this.mode !== FilterControlMessageType.BYPASS && this.filter) this.filter(message, this.params);
+    if (this.mode !== FilterControlMessageType.BYPASS && this.filter)
+      this.filter(message, this.params);
     return message;
   }
 

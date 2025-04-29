@@ -1,5 +1,5 @@
-import { Mediator } from "@puremvc/puremvc-typescript-multicore-framework";
-import { JunctionMediatorNotification, JunctionType } from "../types";
+import { Mediator, } from "@puremvc/puremvc-typescript-multicore-framework";
+import { JunctionMediatorNotification, JunctionType, } from "../types";
 /**
  * Junction Mediator.
  *

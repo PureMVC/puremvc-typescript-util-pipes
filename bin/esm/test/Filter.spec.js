@@ -1,5 +1,5 @@
 import { Filter, Pipe, PipeListener } from "../plumbing/";
-import { PipeMessageType, FilterControlMessageType } from "../types";
+import { PipeMessageType, FilterControlMessageType, } from "../types";
 let messagesReceived;
 let callBackMethod;
 /**
@@ -78,7 +78,7 @@ describe("Filter Test", () => {
                 name: "Scale",
                 output: new PipeListener(callBackMethod),
                 params: { factor: 10 },
-                filter: scale
+                filter: scale,
             });
             const written = filter.write(message);
             expect(written).toBe(true);
@@ -108,7 +108,7 @@ describe("Filter Test", () => {
                 name: "Scale",
                 output: new PipeListener(callBackMethod),
                 params: { factor: 10 },
-                filter: scale
+                filter: scale,
             });
             const written = filter.write(message);
             expect(written).toBe(true);
@@ -137,17 +137,17 @@ describe("Filter Test", () => {
             };
             // Create the filter
             const filter = new Filter({
-                name: 'Scale',
+                name: "Scale",
                 output: new PipeListener(callBackMethod),
                 params: { factor: 10 },
-                filter: scale
+                filter: scale,
             });
             const listener = new PipeListener(callBackMethod);
             filter.connect(listener);
             // create bypass control message
             let bypassMessage = {
                 type: FilterControlMessageType.BYPASS,
-                name: 'Scale'
+                name: "Scale",
             };
             // Send the bypass control message to the filter
             const bypassWritten = filter.write(bypassMessage);
@@ -180,17 +180,17 @@ describe("Filter Test", () => {
             };
             // Create the filter
             const filter = new Filter({
-                name: 'Scale',
+                name: "Scale",
                 output: new PipeListener(callBackMethod),
                 params: { factor: 10 },
-                filter: scale
+                filter: scale,
             });
             const listener = new PipeListener(callBackMethod);
             filter.connect(listener);
             // create bypass control message
             let bypassMessage = {
                 type: FilterControlMessageType.BYPASS,
-                name: 'Scale'
+                name: "Scale",
             };
             // Send the bypass control message to the filter, putting it into bypass mode
             const bypassWritten = filter.write(bypassMessage);
@@ -198,7 +198,7 @@ describe("Filter Test", () => {
             // create filter control message
             let filterMessage = {
                 type: FilterControlMessageType.FILTER,
-                name: 'Scale'
+                name: "Scale",
             };
             // Send the control message to the filter, putting back into filter mode
             const filterMessageWritten = filter.write(filterMessage);
