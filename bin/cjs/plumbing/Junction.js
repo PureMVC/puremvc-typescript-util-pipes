@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Junction = void 0;
-const types_1 = require("../types");
+const index_1 = require("../index");
 /**
  * Pipe Junction.
  *
@@ -58,10 +58,10 @@ class Junction {
             this.pipesMap.set(name, pipe);
             this.pipeTypesMap.set(name, type);
             switch (type) {
-                case types_1.JunctionType.INPUT:
+                case index_1.JunctionType.INPUT:
                     this.inputPipes.add(name);
                     break;
-                case types_1.JunctionType.OUTPUT:
+                case index_1.JunctionType.OUTPUT:
                     this.outputPipes.add(name);
                     break;
                 default:
@@ -89,7 +89,7 @@ class Junction {
      * @return boolean whether an INPUT pipe is registered with that name.
      */
     hasInputPipe(name) {
-        return (this.hasPipe(name) && this.pipeTypesMap.get(name) === types_1.JunctionType.INPUT);
+        return (this.hasPipe(name) && this.pipeTypesMap.get(name) === index_1.JunctionType.INPUT);
     }
     /**
      * Does this junction have an OUTPUT pipe by this name?
@@ -98,7 +98,7 @@ class Junction {
      * @return boolean whether an OUTPUT pipe is registered with that name.
      */
     hasOutputPipe(name) {
-        return (this.hasPipe(name) && this.pipeTypesMap.get(name) === types_1.JunctionType.OUTPUT);
+        return (this.hasPipe(name) && this.pipeTypesMap.get(name) === index_1.JunctionType.OUTPUT);
     }
     /**
      * Remove the pipe with this name if it is registered.
@@ -114,10 +114,10 @@ class Junction {
             let type = this.pipeTypesMap.get(name);
             let pipesList;
             switch (type) {
-                case types_1.JunctionType.INPUT:
+                case index_1.JunctionType.INPUT:
                     pipesList = this.inputPipes;
                     break;
-                case types_1.JunctionType.OUTPUT:
+                case index_1.JunctionType.OUTPUT:
                     pipesList = this.outputPipes;
                     break;
                 default:
@@ -157,7 +157,7 @@ class Junction {
         let success = false;
         if (this.hasInputPipe(inputPipeName)) {
             let pipe = this.pipesMap.get(inputPipeName);
-            success = (pipe === null || pipe === void 0 ? void 0 : pipe.connect(new types_1.PipeListener(listener))) || false;
+            success = (pipe === null || pipe === void 0 ? void 0 : pipe.connect(new index_1.PipeListener(listener))) || false;
         }
         return success;
     }

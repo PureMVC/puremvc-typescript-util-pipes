@@ -7,7 +7,7 @@ import {
   PropBag,
   FilterControlMessage,
   FilterControlMessageType,
-} from "../types";
+} from "../index";
 
 let messagesReceived: IPipeMessage[];
 let callBackMethod: (message: IPipeMessage) => void;

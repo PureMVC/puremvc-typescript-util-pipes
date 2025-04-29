@@ -4,7 +4,7 @@ import {
   IPipeMessage,
   PipeMessageType,
   QueueControlMessageType,
-} from "../types";
+} from "../index";
 
 /**
  * Pipe Queue.

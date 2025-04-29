@@ -7,7 +7,7 @@ import {
   PipeMessageType,
   PropBag,
   Pipe,
-} from "../types";
+} from "../index";
 
 /**
  * Pipe Filter.

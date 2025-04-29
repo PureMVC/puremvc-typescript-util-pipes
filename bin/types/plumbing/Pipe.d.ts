@@ -1,4 +1,4 @@
-import { IPipeFitting, IPipeMessage } from "../types";
+import { IPipeFitting, IPipeMessage } from "../index";
 /**
  * Pipe.
  *

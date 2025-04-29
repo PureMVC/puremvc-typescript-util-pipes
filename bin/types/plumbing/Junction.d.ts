@@ -1,4 +1,4 @@
-import { IPipeFitting, PipeListenerCallback, IPipeMessage, JunctionType } from "../types";
+import { IPipeFitting, PipeListenerCallback, IPipeMessage, JunctionType } from "../index";
 /**
  * Pipe Junction.
  *

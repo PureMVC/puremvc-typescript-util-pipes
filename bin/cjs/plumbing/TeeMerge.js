@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TeeMerge = void 0;
-const types_1 = require("../types");
+const index_1 = require("../index");
 /**
  * Merging Pipe Tee.
  *
  * Writes the messages from multiple input pipelines into
  * a single output pipe fitting.
  */
-class TeeMerge extends types_1.Pipe {
+class TeeMerge extends index_1.Pipe {
     /**
      * Constructor.
      *

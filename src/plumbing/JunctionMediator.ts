@@ -8,7 +8,7 @@ import {
   JunctionType,
   IPipeFitting,
   IPipeMessage,
-} from "../types";
+} from "../index";
 
 /**
  * Junction Mediator.

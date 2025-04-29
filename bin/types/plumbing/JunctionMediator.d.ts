@@ -1,5 +1,5 @@
 import { INotification, Mediator } from "@puremvc/puremvc-typescript-multicore-framework";
-import { Junction, IPipeMessage } from "../types";
+import { Junction, IPipeMessage } from "../index";
 /**
  * Junction Mediator.
  *

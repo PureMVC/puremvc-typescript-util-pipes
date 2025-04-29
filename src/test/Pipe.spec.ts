@@ -1,5 +1,5 @@
 import { Pipe } from "../plumbing";
-import { IPipeFitting } from "../types";
+import { IPipeFitting } from "../index";
 
 /**
  * Test the Pipe class.

@@ -1,4 +1,4 @@
-import { FilterControlMessageType, PipeMessageType, Pipe, } from "../types";
+import { FilterControlMessageType, PipeMessageType, Pipe, } from "../index";
 /**
  * Pipe Filter.
  *

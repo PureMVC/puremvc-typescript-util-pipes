@@ -13,7 +13,7 @@
   "include": ["src/**/*"],
   "exclude": ["docs", "node_modules", "bin", "test"],
   "typedocOptions": {
-    "entryPoints": ["src/types/index.ts"],
+    "entryPoints": ["src/index.ts"],
     "out": "docs"
   },
   "typeRoots": [

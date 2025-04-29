@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const plumbing_1 = require("../plumbing/");
-const types_1 = require("../types");
+const index_1 = require("../index");
 let messagesReceived;
 let callBackMethod;
 /**
@@ -63,7 +63,7 @@ describe("Filter Test", () => {
             var _a, _b;
             // create a message
             const message = {
-                type: types_1.PipeMessageType.NORMAL,
+                type: index_1.PipeMessageType.NORMAL,
                 header: { width: 10, height: 2 },
             };
             const scale = (message, params) => {
@@ -93,7 +93,7 @@ describe("Filter Test", () => {
             var _a, _b;
             // create a message
             const message = {
-                type: types_1.PipeMessageType.NORMAL,
+                type: index_1.PipeMessageType.NORMAL,
                 body: { width: 10, height: 2 },
             };
             const scale = (message, params) => {
@@ -123,7 +123,7 @@ describe("Filter Test", () => {
             var _a, _b;
             // create a message
             const message = {
-                type: types_1.PipeMessageType.NORMAL,
+                type: index_1.PipeMessageType.NORMAL,
                 body: { width: 10, height: 2 },
             };
             // Create the filter control function
@@ -148,7 +148,7 @@ describe("Filter Test", () => {
             filter.connect(listener);
             // create bypass control message
             let bypassMessage = {
-                type: types_1.FilterControlMessageType.BYPASS,
+                type: index_1.FilterControlMessageType.BYPASS,
                 name: "Scale",
             };
             // Send the bypass control message to the filter
@@ -166,7 +166,7 @@ describe("Filter Test", () => {
             var _a, _b;
             // create a message
             const message = {
-                type: types_1.PipeMessageType.NORMAL,
+                type: index_1.PipeMessageType.NORMAL,
                 body: { width: 10, height: 2 },
             };
             // Create the filter control function
@@ -191,7 +191,7 @@ describe("Filter Test", () => {
             filter.connect(listener);
             // create bypass control message
             let bypassMessage = {
-                type: types_1.FilterControlMessageType.BYPASS,
+                type: index_1.FilterControlMessageType.BYPASS,
                 name: "Scale",
             };
             // Send the bypass control message to the filter, putting it into bypass mode
@@ -199,7 +199,7 @@ describe("Filter Test", () => {
             expect(bypassWritten).toBe(true);
             // create filter control message
             let filterMessage = {
-                type: types_1.FilterControlMessageType.FILTER,
+                type: index_1.FilterControlMessageType.FILTER,
                 name: "Scale",
             };
             // Send the control message to the filter, putting back into filter mode

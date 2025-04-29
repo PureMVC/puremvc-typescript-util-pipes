@@ -4,7 +4,7 @@ import {
   PipeListenerCallback,
   IPipeMessage,
   JunctionType,
-} from "../types";
+} from "../index";
 
 /**
  * Pipe Junction.

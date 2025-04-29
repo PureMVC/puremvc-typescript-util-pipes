@@ -1,4 +1,4 @@
-import { FilterControlFunction, IPipeFitting, IPipeMessage, PropBag, Pipe } from "../types";
+import { FilterControlFunction, IPipeFitting, IPipeMessage, PropBag, Pipe } from "../index";
 /**
  * Pipe Filter.
  *

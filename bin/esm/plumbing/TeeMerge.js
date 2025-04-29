@@ -1,4 +1,4 @@
-import { Pipe } from "../types";
+import { Pipe } from "../index";
 /**
  * Merging Pipe Tee.
  *

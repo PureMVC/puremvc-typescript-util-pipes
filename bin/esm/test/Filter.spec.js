@@ -1,5 +1,5 @@
 import { Filter, Pipe, PipeListener } from "../plumbing/";
-import { PipeMessageType, FilterControlMessageType, } from "../types";
+import { PipeMessageType, FilterControlMessageType, } from "../index";
 let messagesReceived;
 let callBackMethod;
 /**

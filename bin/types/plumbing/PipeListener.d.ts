@@ -1,4 +1,4 @@
-import { IPipeFitting, IPipeMessage, PipeListenerCallback } from "../types";
+import { IPipeFitting, IPipeMessage, PipeListenerCallback } from "../index";
 /**
  * Pipe Listener.
  *

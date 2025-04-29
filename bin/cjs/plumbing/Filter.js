@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Filter = void 0;
-const types_1 = require("../types");
+const index_1 = require("../index");
 /**
  * Pipe Filter.
  *
@@ -10,7 +10,7 @@ const types_1 = require("../types");
  * filter function passed to them by control message, as well as having
  * their Bypass/Filter operation mode toggled via control message.
  */
-class Filter extends types_1.Pipe {
+class Filter extends index_1.Pipe {
     /**
      * Constructor.
      *
@@ -18,7 +18,7 @@ class Filter extends types_1.Pipe {
      */
     constructor({ name, output, filter, params, }) {
         super(output);
-        this.mode = types_1.FilterControlMessageType.FILTER;
+        this.mode = index_1.FilterControlMessageType.FILTER;
         this.filter = undefined;
         this.params = {};
         this.name = "Unnamed Filter";
@@ -71,9 +71,9 @@ class Filter extends types_1.Pipe {
         let success = true;
         // Filter normal messages
         switch (message.type) {
-            case types_1.PipeMessageType.NORMAL:
+            case index_1.PipeMessageType.NORMAL:
                 try {
-                    if (this.mode === types_1.FilterControlMessageType.FILTER) {
+                    if (this.mode === index_1.FilterControlMessageType.FILTER) {
                         outputMessage = this.applyFilter(message);
                     }
                     else {
@@ -87,7 +87,7 @@ class Filter extends types_1.Pipe {
                 }
                 break;
             // Accept parameters from control message
-            case types_1.FilterControlMessageType.SET_PARAMS:
+            case index_1.FilterControlMessageType.SET_PARAMS:
                 if (this.isTarget(message)) {
                     this.params = message.params || {};
                 }
@@ -96,7 +96,7 @@ class Filter extends types_1.Pipe {
                 }
                 break;
             // Accept filter function from control message
-            case types_1.FilterControlMessageType.SET_FILTER:
+            case index_1.FilterControlMessageType.SET_FILTER:
                 if (this.isTarget(message)) {
                     this.filter = message.filter;
                 }
@@ -105,8 +105,8 @@ class Filter extends types_1.Pipe {
                 }
                 break;
             // Toggle between Filter or Bypass operational modes
-            case types_1.FilterControlMessageType.BYPASS:
-            case types_1.FilterControlMessageType.FILTER:
+            case index_1.FilterControlMessageType.BYPASS:
+            case index_1.FilterControlMessageType.FILTER:
                 if (this.isTarget(message)) {
                     this.mode = message.type;
                 }
@@ -130,7 +130,7 @@ class Filter extends types_1.Pipe {
      * Filter the message.
      */
     applyFilter(message) {
-        if (this.mode !== types_1.FilterControlMessageType.BYPASS && this.filter)
+        if (this.mode !== index_1.FilterControlMessageType.BYPASS && this.filter)
             this.filter(message, this.params);
         return message;
     }

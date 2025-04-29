@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JunctionMediator = void 0;
 const puremvc_typescript_multicore_framework_1 = require("@puremvc/puremvc-typescript-multicore-framework");
-const types_1 = require("../types");
+const index_1 = require("../index");
 /**
  * Junction Mediator.
  *
@@ -25,8 +25,8 @@ class JunctionMediator extends puremvc_typescript_multicore_framework_1.Mediator
      */
     listNotificationInterests() {
         return [
-            types_1.JunctionMediatorNotification.ACCEPT_INPUT_PIPE,
-            types_1.JunctionMediatorNotification.ACCEPT_OUTPUT_PIPE,
+            index_1.JunctionMediatorNotification.ACCEPT_INPUT_PIPE,
+            index_1.JunctionMediatorNotification.ACCEPT_OUTPUT_PIPE,
         ];
     }
     /**
@@ -44,23 +44,23 @@ class JunctionMediator extends puremvc_typescript_multicore_framework_1.Mediator
             // accept an input pipe
             // register the pipe and if successful
             // set this mediator as its listener
-            case types_1.JunctionMediatorNotification.ACCEPT_INPUT_PIPE:
+            case index_1.JunctionMediatorNotification.ACCEPT_INPUT_PIPE:
                 const inputPipeName = note.type;
                 const inputPipe = note.body;
                 if (this.junction.registerPipe({
                     name: inputPipeName,
-                    type: types_1.JunctionType.INPUT,
+                    type: index_1.JunctionType.INPUT,
                     pipe: inputPipe,
                 }))
                     this.junction.addPipeListener(inputPipeName, (message) => this.handlePipeMessage(message));
                 break;
             // accept an output pipe
-            case types_1.JunctionMediatorNotification.ACCEPT_OUTPUT_PIPE:
+            case index_1.JunctionMediatorNotification.ACCEPT_OUTPUT_PIPE:
                 const outputPipeName = note.type;
                 const outputPipe = note.body;
                 this.junction.registerPipe({
                     name: outputPipeName,
-                    type: types_1.JunctionType.OUTPUT,
+                    type: index_1.JunctionType.OUTPUT,
                     pipe: outputPipe,
                 });
                 break;

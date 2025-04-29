@@ -1,4 +1,4 @@
-import { Pipe, PipeMessageType, QueueControlMessageType, } from "../types";
+import { Pipe, PipeMessageType, QueueControlMessageType, } from "../index";
 /**
  * Pipe Queue.
  *
