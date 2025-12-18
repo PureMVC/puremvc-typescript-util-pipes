@@ -433,6 +433,44 @@ describe("Filter Test", () => {
       ).toBe(true);
     });
 
+    test("Non-targeted SET_PARAMS with no output returns false (write-through)", () => {
+      const filter = new Filter({ name: "TargetOnly" });
+      const ctrl: FilterControlMessage = {
+        type: FilterControlMessageType.SET_PARAMS,
+        name: "Other",
+        params: { x: 1 },
+      };
+      expect(filter.write(ctrl)).toBe(false);
+    });
+
+    test("Non-targeted SET_FILTER with no output returns false (write-through)", () => {
+      const filter = new Filter({ name: "TargetOnly" });
+      const f: FilterControlFunction = (m) => true;
+      const ctrl: FilterControlMessage = {
+        type: FilterControlMessageType.SET_FILTER,
+        name: "Other",
+        filter: f,
+      };
+      expect(filter.write(ctrl)).toBe(false);
+    });
+
+    test("Non-targeted BYPASS/FILTER and unrelated control return false when no output", () => {
+      const filter = new Filter({ name: "TargetOnly" });
+      const bypass: FilterControlMessage = {
+        type: FilterControlMessageType.BYPASS,
+        name: "Other",
+      };
+      const filt: FilterControlMessage = {
+        type: FilterControlMessageType.FILTER,
+        name: "Other",
+      };
+      expect(filter.write(bypass)).toBe(false);
+      expect(filter.write(filt)).toBe(false);
+      // default branch with unrelated control message and no output
+      const unrelated: IPipeMessage = { type: QueueControlMessageType.FLUSH };
+      expect(filter.write(unrelated)).toBe(false);
+    });
+
     test("Filter function throws: write returns false and swallows error", () => {
       const received: IPipeMessage[] = [];
       const listener = new PipeListener((m) => received.push(m));
