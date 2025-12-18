@@ -1,6 +1,9 @@
 ## [PureMVC](http://puremvc.github.com/) [Typescript](https://github.com/PureMVC/puremvc-typescript-multicore-framework) Utility: Pipes
 Create pipelines that pass messages between Cores in a PureMVC MultiCore-based application. Pipelines can contain filters, queues, splitting and merging tees, and more.
 
+## Dev Guide
+* [PureMVC TypeScript Pipes — Developer Guide](DEV_GUIDE.md)
+
 ## Installation
 ```shell
 npm install @puremvc/puremvc-typescript-multicore-framework
