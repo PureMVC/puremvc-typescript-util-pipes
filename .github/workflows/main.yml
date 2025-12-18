@@ -24,7 +24,7 @@ jobs:
       - run: npm install --no-package-lock
 
       - name: Check formatting
-        run: npm run format
+        run: npm run format:check
 
       - name: Check syntax
         run: npm run lint
