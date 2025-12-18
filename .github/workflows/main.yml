@@ -12,9 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6.0.0
+      - uses: actions/setup-node@v6.1.0
         with:
           node-version-file: package.json
           cache: npm
@@ -47,8 +46,8 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6.0.0
+      - uses: actions/setup-node@v6.1.0
         with:
           node-version-file: package.json
           cache: npm
