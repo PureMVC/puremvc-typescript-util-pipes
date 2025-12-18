@@ -1,10 +1,7 @@
-import {
-  Pipe,
-  IPipeFitting,
-  IPipeMessage,
-  PipeMessageType,
-  QueueControlMessageType,
-} from "../index";
+import { Pipe } from "./Pipe";
+import { IPipeFitting } from "../types/pipe";
+import { IPipeMessage } from "../types/message";
+import { PipeMessageType, QueueControlMessageType } from "../types/enum";
 
 /**
  * Pipe Queue.
@@ -102,10 +99,10 @@ export class Queue extends Pipe {
    */
   protected flush(): boolean {
     let success: boolean = true;
-    let message: IPipeMessage = this.messages.shift() as IPipeMessage;
-    while (message !== null) {
+    let message: IPipeMessage | undefined = this.messages.shift();
+    while (message !== undefined) {
       success = this.output?.write(message) || false;
-      message = this.messages.shift() as IPipeMessage;
+      message = this.messages.shift();
     }
     return success;
   }

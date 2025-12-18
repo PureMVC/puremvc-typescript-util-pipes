@@ -15,7 +15,7 @@ import {
  * declared as being an INPUT pipe or an OUTPUT pipe.
  *
  * You can retrieve or remove a registered Pipe by name,
- * check to see if a Pipe with a given name exists,or if
+ * check to see if a Pipe with a given name exists, or if
  * it exists AND is an INPUT or an OUTPUT Pipe.
  *
  * You can send an `PipeMessage` on a named INPUT Pipe
@@ -75,7 +75,7 @@ export class Junction {
    * @return boolean whether as pipe is registered with that name.
    */
   public hasPipe(name: string): boolean {
-    return this.pipesMap.get(name) !== null;
+    return this.pipesMap.has(name);
   }
 
   /**
@@ -155,7 +155,7 @@ export class Junction {
    * Add a PipeListener to an INPUT pipe.
    *
    * NOTE: there can only be one PipeListener per pipe,
-   * and the listener function must accept an PipeMessage
+   * and the listener function must accept an IPipeMessage
    * as its sole argument.
    *
    * @param inputPipeName the INPUT pipe to add a PipeListener to

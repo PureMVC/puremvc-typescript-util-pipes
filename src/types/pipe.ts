@@ -80,7 +80,7 @@ export type FilterControlFunction = (
 ) => boolean;
 
 /**
- * A bag of unknown properties, e
+ * A bag of unknown properties
  */
 export type PropBag = { [key: string]: unknown };
 
