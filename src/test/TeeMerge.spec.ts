@@ -64,14 +64,18 @@ describe("TeeMerge Test", () => {
 
     expect(message1).toBe(pipe1Message);
     expect(message1.type).toBe(PipeMessageType.NORMAL);
-    expect((message1.header as any).testProp).toBe(1);
-    expect((message1.body as any).testAtt).toBe("Pipe 1 Message");
+    expect((message1.header as { testProp: number }).testProp).toBe(1);
+    expect((message1.body as { testAtt: string }).testAtt).toBe(
+      "Pipe 1 Message",
+    );
     expect(message1.priority).toBe(3);
 
     expect(message2).toBe(pipe2Message);
     expect(message2.type).toBe(PipeMessageType.NORMAL);
-    expect((message2.header as any).testProp).toBe(2);
-    expect((message2.body as any).testAtt).toBe("Pipe 2 Message");
+    expect((message2.header as { testProp: number }).testProp).toBe(2);
+    expect((message2.body as { testAtt: string }).testAtt).toBe(
+      "Pipe 2 Message",
+    );
     expect(message2.priority).toBe(1);
   });
 
@@ -128,9 +132,9 @@ describe("TeeMerge Test", () => {
     expect(m2).toBe(pipe2Message);
     expect(m3).toBe(pipe3Message);
     expect(m4).toBe(pipe4Message);
-    expect((m1.header as any).testProp).toBe(1);
-    expect((m2.header as any).testProp).toBe(2);
-    expect((m3.header as any).testProp).toBe(3);
-    expect((m4.header as any).testProp).toBe(4);
+    expect((m1.header as { testProp: number }).testProp).toBe(1);
+    expect((m2.header as { testProp: number }).testProp).toBe(2);
+    expect((m3.header as { testProp: number }).testProp).toBe(3);
+    expect((m4.header as { testProp: number }).testProp).toBe(4);
   });
 });

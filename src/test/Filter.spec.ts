@@ -278,7 +278,8 @@ describe("Filter Test", () => {
 
       const scale: FilterControlFunction = (message, params) => {
         const factor = (params?.factor as number) || 1;
-        const v = ((message.body as any)?.v as number) || 0;
+        const body = message.body as { v?: number } | undefined;
+        const v = body?.v ?? 0;
         message.body = { v: v * factor };
         return true;
       };
@@ -299,10 +300,13 @@ describe("Filter Test", () => {
       expect(filter.write(setParams)).toBe(true);
 
       // send a normal message and ensure new params used
-      const msg: IPipeMessage = { type: PipeMessageType.NORMAL, body: { v: 3 } };
+      const msg: IPipeMessage = {
+        type: PipeMessageType.NORMAL,
+        body: { v: 3 },
+      };
       expect(filter.write(msg)).toBe(true);
       expect(received[0]).toBe(msg);
-      expect((received[0].body as any).v).toBe(15);
+      expect((received[0].body as { v: number }).v).toBe(15);
     });
 
     test("SET_PARAMS non-targeted passes through and does not change params", () => {
@@ -310,7 +314,8 @@ describe("Filter Test", () => {
       const listener = new PipeListener((m) => received.push(m));
       const scale: FilterControlFunction = (message, params) => {
         const factor = (params?.factor as number) || 1;
-        const v = ((message.body as any)?.v as number) || 0;
+        const body = message.body as { v?: number } | undefined;
+        const v = body?.v ?? 0;
         message.body = { v: v * factor };
         return true;
       };
@@ -329,20 +334,23 @@ describe("Filter Test", () => {
       // control message should pass through
       expect(received[0]).toBe(ctrl);
       // params should remain unchanged (2), so result should be 6 not 30
-      const msg: IPipeMessage = { type: PipeMessageType.NORMAL, body: { v: 3 } };
+      const msg: IPipeMessage = {
+        type: PipeMessageType.NORMAL,
+        body: { v: 3 },
+      };
       expect(filter.write(msg)).toBe(true);
-      expect((received[1].body as any).v).toBe(6);
+      expect((received[1].body as { v: number }).v).toBe(6);
     });
 
     test("SET_FILTER targeted updates filter function", () => {
       const received: IPipeMessage[] = [];
       const listener = new PipeListener((m) => received.push(m));
       const f1: FilterControlFunction = (message) => {
-        (message.body as any) = { ok: 1 };
+        message.body = { ok: 1 };
         return true;
       };
       const f2: FilterControlFunction = (message) => {
-        (message.body as any) = { ok: 2 };
+        message.body = { ok: 2 };
         return true;
       };
       const filter = new Filter({ name: "Swap", output: listener, filter: f1 });
@@ -351,22 +359,22 @@ describe("Filter Test", () => {
         type: FilterControlMessageType.SET_FILTER,
         name: "Swap",
         filter: f2,
-      } as any;
+      };
       expect(filter.write(setFilter)).toBe(true);
-      const msg: IPipeMessage = { type: PipeMessageType.NORMAL } as any;
+      const msg: IPipeMessage = { type: PipeMessageType.NORMAL };
       expect(filter.write(msg)).toBe(true);
-      expect((received[0] as any).body.ok).toBe(2);
+      expect(((received[0] as IPipeMessage).body as { ok: number }).ok).toBe(2);
     });
 
     test("SET_FILTER non-targeted passes through and does not change filter", () => {
       const received: IPipeMessage[] = [];
       const listener = new PipeListener((m) => received.push(m));
       const f1: FilterControlFunction = (message) => {
-        (message.body as any) = { ok: 1 };
+        message.body = { ok: 1 };
         return true;
       };
       const f2: FilterControlFunction = (message) => {
-        (message.body as any) = { ok: 2 };
+        message.body = { ok: 2 };
         return true;
       };
       const filter = new Filter({ name: "Swap", output: listener, filter: f1 });
@@ -374,12 +382,12 @@ describe("Filter Test", () => {
         type: FilterControlMessageType.SET_FILTER,
         name: "Other",
         filter: f2,
-      } as any;
+      };
       expect(filter.write(setFilter)).toBe(true);
       expect(received[0]).toBe(setFilter);
-      const msg: IPipeMessage = { type: PipeMessageType.NORMAL } as any;
+      const msg: IPipeMessage = { type: PipeMessageType.NORMAL };
       expect(filter.write(msg)).toBe(true);
-      expect((received[1] as any).body.ok).toBe(1);
+      expect(((received[1] as IPipeMessage).body as { ok: number }).ok).toBe(1);
     });
 
     test("Non-targeted BYPASS/FILTER messages pass through, do not change mode", () => {
@@ -397,7 +405,7 @@ describe("Filter Test", () => {
       expect(filter.write(bypass)).toBe(true);
       expect(received[0]).toBe(bypass);
       // still in FILTER mode, so normal message should be written unchanged (no filter)
-      const msg: IPipeMessage = { type: PipeMessageType.NORMAL } as any;
+      const msg: IPipeMessage = { type: PipeMessageType.NORMAL };
       expect(filter.write(msg)).toBe(true);
       expect(received[1]).toBe(msg);
       // send FILTER (non-targeted) and ensure it passes through
@@ -409,16 +417,19 @@ describe("Filter Test", () => {
       const received: IPipeMessage[] = [];
       const listener = new PipeListener((m) => received.push(m));
       const filter = new Filter({ output: listener });
-      const ctrl: IPipeMessage = { type: QueueControlMessageType.FLUSH } as any;
+      const ctrl: IPipeMessage = { type: QueueControlMessageType.FLUSH };
       expect(filter.write(ctrl)).toBe(true);
       expect(received[0]).toBe(ctrl);
     });
 
     test("No output connected: write returns false", () => {
       const filter = new Filter({ name: "NoOut" });
-      expect(filter.write({ type: PipeMessageType.NORMAL } as any)).toBe(false);
+      expect(filter.write({ type: PipeMessageType.NORMAL })).toBe(false);
       expect(
-        filter.write({ type: FilterControlMessageType.BYPASS, name: "NoOut" }),
+        filter.write({
+          type: FilterControlMessageType.BYPASS,
+          name: "NoOut",
+        } as FilterControlMessage),
       ).toBe(true);
     });
 
@@ -429,7 +440,7 @@ describe("Filter Test", () => {
         throw new Error("bad");
       };
       const filter = new Filter({ name: "Bad", output: listener, filter: bad });
-      const msg: IPipeMessage = { type: PipeMessageType.NORMAL } as any;
+      const msg: IPipeMessage = { type: PipeMessageType.NORMAL };
       expect(filter.write(msg)).toBe(false);
       expect(received.length).toBe(0);
     });
@@ -445,7 +456,7 @@ describe("Filter Test", () => {
       };
       expect(filter.write(msg)).toBe(true);
       expect(received[0]).toBe(msg);
-      expect((received[0].body as any).val).toBe(7);
+      expect((received[0].body as { val: number }).val).toBe(7);
     });
 
     test("SET_PARAMS targeted with undefined params sets empty object", () => {
@@ -453,20 +464,24 @@ describe("Filter Test", () => {
       const listener = new PipeListener((m) => received.push(m));
       const scale: FilterControlFunction = (message, params) => {
         const factor = (params?.factor as number) || 1;
-        (message.body as any) = { v: factor };
+        message.body = { v: factor };
         return true;
       };
-      const filter = new Filter({ name: "Target", output: listener, filter: scale });
+      const filter = new Filter({
+        name: "Target",
+        output: listener,
+        filter: scale,
+      });
       // send SET_PARAMS without params
       const ctrl: FilterControlMessage = {
         type: FilterControlMessageType.SET_PARAMS,
         name: "Target",
-      } as any;
+      };
       expect(filter.write(ctrl)).toBe(true);
-      const msg: IPipeMessage = { type: PipeMessageType.NORMAL } as any;
+      const msg: IPipeMessage = { type: PipeMessageType.NORMAL };
       expect(filter.write(msg)).toBe(true);
       // since params became {}, factor defaults to 1
-      expect((received[0].body as any).v).toBe(1);
+      expect((received[0].body as { v: number }).v).toBe(1);
     });
   });
 });

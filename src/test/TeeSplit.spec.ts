@@ -36,10 +36,18 @@ describe("TeeSplit Test", () => {
     const messagesReceived: IPipeMessage[] = [];
 
     const input1: IPipeFitting = new Pipe();
-    const pipe1: IPipeFitting = new Pipe(new PipeListener((m) => messagesReceived.push(m)));
-    const pipe2: IPipeFitting = new Pipe(new PipeListener((m) => messagesReceived.push(m)));
-    const pipe3: IPipeFitting = new Pipe(new PipeListener((m) => messagesReceived.push(m)));
-    const pipe4: IPipeFitting = new Pipe(new PipeListener((m) => messagesReceived.push(m)));
+    const pipe1: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived.push(m)),
+    );
+    const pipe2: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived.push(m)),
+    );
+    const pipe3: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived.push(m)),
+    );
+    const pipe4: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived.push(m)),
+    );
 
     const teeSplit: TeeSplit = new TeeSplit(pipe1, pipe2);
     teeSplit.connect(pipe3);
@@ -74,8 +82,12 @@ describe("TeeSplit Test", () => {
     const messagesReceived2: IPipeMessage[] = [];
 
     const input: IPipeFitting = new Pipe();
-    const out1: IPipeFitting = new Pipe(new PipeListener((m) => messagesReceived1.push(m)));
-    const out2: IPipeFitting = new Pipe(new PipeListener((m) => messagesReceived2.push(m)));
+    const out1: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived1.push(m)),
+    );
+    const out2: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived2.push(m)),
+    );
 
     const teeSplit: TeeSplit = new TeeSplit(out1, out2);
 

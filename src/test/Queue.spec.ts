@@ -38,9 +38,11 @@ describe("Queue Test", () => {
       header: { testProp: 3 },
     };
 
-    const flush: IPipeMessage = { type: QueueControlMessageType.FLUSH } as any;
+    const flush: IPipeMessage = { type: QueueControlMessageType.FLUSH };
 
-    const queue: Queue = new Queue(new PipeListener((m) => messagesReceived.push(m)));
+    const queue: Queue = new Queue(
+      new PipeListener((m) => messagesReceived.push(m)),
+    );
 
     const message1written = queue.write(message1);
     const message2written = queue.write(message2);
@@ -82,16 +84,18 @@ describe("Queue Test", () => {
       priority: 1, // HIGH
     };
 
-    const queue: Queue = new Queue(new PipeListener((m) => messagesReceived.push(m)));
+    const queue: Queue = new Queue(
+      new PipeListener((m) => messagesReceived.push(m)),
+    );
 
     // begin sort-by-priority mode
-    const sortWritten = queue.write({ type: QueueControlMessageType.SORT } as any);
+    const sortWritten = queue.write({ type: QueueControlMessageType.SORT });
 
     // write messages and flush
     const w1 = queue.write(message1);
     const w2 = queue.write(message2);
     const w3 = queue.write(message3);
-    const flushWritten = queue.write({ type: QueueControlMessageType.FLUSH } as any);
+    const flushWritten = queue.write({ type: QueueControlMessageType.FLUSH });
 
     expect(sortWritten).toBe(true);
     expect(w1 && w2 && w3 && flushWritten).toBe(true);
@@ -109,11 +113,11 @@ describe("Queue Test", () => {
     expect(r3).toBe(message2);
 
     // switch back to FIFO
-    const fifoWritten = queue.write({ type: QueueControlMessageType.FIFO } as any);
+    const fifoWritten = queue.write({ type: QueueControlMessageType.FIFO });
     const w1b = queue.write(message1);
     const w2b = queue.write(message2);
     const w3b = queue.write(message3);
-    const flushWrittenB = queue.write({ type: QueueControlMessageType.FLUSH } as any);
+    const flushWrittenB = queue.write({ type: QueueControlMessageType.FLUSH });
 
     expect(fifoWritten && w1b && w2b && w3b && flushWrittenB).toBe(true);
     expect(messagesReceived.length).toBe(3);

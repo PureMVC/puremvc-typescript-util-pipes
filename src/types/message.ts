@@ -3,6 +3,7 @@ import {
   FilterControlMessageType,
   QueueControlMessageType,
 } from "./enum";
+import { FilterControlFunction, PropBag } from "./pipe";
 
 /**
  * Pipe Message Interface.
@@ -49,8 +50,8 @@ export interface IPipeMessage {
 export interface FilterControlMessage extends IPipeMessage {
   name: string;
   type: FilterControlMessageType;
-  filter?: (message: IPipeMessage) => boolean;
-  params?: { [key: string]: unknown };
+  filter?: FilterControlFunction;
+  params?: PropBag;
 }
 
 /**

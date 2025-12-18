@@ -52,19 +52,23 @@ describe("PipeListener Test", () => {
     expect(written).toBe(true);
     expect(messageReceived).toBeDefined();
     expect((messageReceived as IPipeMessage).type).toBe(PipeMessageType.NORMAL);
-    expect(((messageReceived as IPipeMessage).header as any).testProp).toBe(
-      "testval",
-    );
-    expect(((messageReceived as IPipeMessage).body as any).testAtt).toBe(
-      "Hello",
-    );
+    expect(
+      ((messageReceived as IPipeMessage).header as { testProp: string })
+        .testProp,
+    ).toBe("testval");
+    expect(
+      ((messageReceived as IPipeMessage).body as { testAtt: string }).testAtt,
+    ).toBe("Hello");
     expect((messageReceived as IPipeMessage).priority).toBe(0);
   });
 
   test("Write returns false when callback is undefined", () => {
-    // Force an undefined callback using a cast
-    const listener = new PipeListener((() => void 0) as any) as any;
-    listener.callback = undefined;
+    // Create a listener and forcibly unset its protected callback via a structural cast
+    const listener = new PipeListener(() => void 0);
+    const testable = listener as unknown as {
+      callback?: ((m: IPipeMessage) => void) | undefined;
+    };
+    testable.callback = undefined;
 
     const success = (listener as PipeListener).write({
       type: PipeMessageType.NORMAL,

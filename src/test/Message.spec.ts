@@ -16,8 +16,8 @@ describe("Message Test", () => {
 
     // assertions
     expect(message.type).toBe(PipeMessageType.NORMAL);
-    expect((message.header as any).testProp).toBe("testval");
-    expect((message.body as any).testAtt).toBe("Hello");
+    expect((message.header as { testProp: string }).testProp).toBe("testval");
+    expect((message.body as { testAtt: string }).testAtt).toBe("Hello");
     expect(message.priority).toBe(1);
   });
 
@@ -34,14 +34,14 @@ describe("Message Test", () => {
     const message: IPipeMessage = { type: PipeMessageType.NORMAL };
 
     // mutate remaining fields (analogous to setters)
-    message.header = { testProp: "testval" } as any;
-    message.body = { testAtt: "Hello" } as any;
+    message.header = { testProp: "testval" };
+    message.body = { testAtt: "Hello" };
     message.priority = 3;
 
     // assertions
     expect(message.type).toBe(PipeMessageType.NORMAL);
-    expect((message.header as any).testProp).toBe("testval");
-    expect((message.body as any).testAtt).toBe("Hello");
+    expect((message.header as { testProp: string }).testProp).toBe("testval");
+    expect((message.body as { testAtt: string }).testAtt).toBe("Hello");
     expect(message.priority).toBe(3);
   });
 });
