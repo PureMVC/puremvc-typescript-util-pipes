@@ -445,7 +445,7 @@ describe("Filter Test", () => {
 
     test("Non-targeted SET_FILTER with no output returns false (write-through)", () => {
       const filter = new Filter({ name: "TargetOnly" });
-      const f: FilterControlFunction = (m) => true;
+      const f: FilterControlFunction = () => true;
       const ctrl: FilterControlMessage = {
         type: FilterControlMessageType.SET_FILTER,
         name: "Other",
