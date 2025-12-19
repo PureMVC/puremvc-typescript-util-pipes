@@ -7,7 +7,7 @@ import {
   PipeMessageType,
   PropBag,
   Pipe,
-} from "../index";
+} from "../index.js";
 
 /**
  * Pipe Filter.

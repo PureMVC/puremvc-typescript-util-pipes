@@ -1,4 +1,4 @@
-import { IPipeMessage } from "./message";
+import { IPipeMessage } from "./message.js";
 
 /**
  * Pipe Fitting Interface.

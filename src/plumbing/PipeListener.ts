@@ -1,4 +1,4 @@
-import { IPipeFitting, IPipeMessage, PipeListenerCallback } from "../index";
+import { IPipeFitting, IPipeMessage, PipeListenerCallback } from "../index.js";
 
 /**
  * Pipe Listener.

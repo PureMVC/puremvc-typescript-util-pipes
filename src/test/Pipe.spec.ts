@@ -1,5 +1,5 @@
-import { Pipe } from "../plumbing";
-import { IPipeFitting } from "../index";
+import { Pipe } from "../plumbing/index.js";
+import { IPipeFitting } from "../index.js";
 
 /**
  * Test the Pipe class.

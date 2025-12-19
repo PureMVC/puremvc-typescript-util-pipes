@@ -1,8 +1,8 @@
-export { Pipe } from "./Pipe";
-export { Queue } from "./Queue";
-export { Filter } from "./Filter";
-export { Junction } from "./Junction";
-export { TeeMerge } from "./TeeMerge";
-export { TeeSplit } from "./TeeSplit";
-export { PipeListener } from "./PipeListener";
-export { JunctionMediator } from "./JunctionMediator";
+export { Pipe } from "./Pipe.js";
+export { Queue } from "./Queue.js";
+export { Filter } from "./Filter.js";
+export { Junction } from "./Junction.js";
+export { TeeMerge } from "./TeeMerge.js";
+export { TeeSplit } from "./TeeSplit.js";
+export { PipeListener } from "./PipeListener.js";
+export { JunctionMediator } from "./JunctionMediator.js";

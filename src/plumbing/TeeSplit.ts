@@ -1,4 +1,4 @@
-import { IPipeFitting, IPipeMessage } from "../index";
+import { IPipeFitting, IPipeMessage } from "../index.js";
 
 /**
  * Splitting Pipe Tee.

@@ -1,10 +1,10 @@
-import { Pipe, Queue, PipeListener } from "../plumbing";
+import { Pipe, Queue, PipeListener } from "../plumbing/index.js";
 import {
   IPipeFitting,
   IPipeMessage,
   PipeMessageType,
   QueueControlMessageType,
-} from "../index";
+} from "../index.js";
 
 describe("Queue Test", () => {
   test("Connect input and output pipes to a Queue", () => {

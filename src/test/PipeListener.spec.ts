@@ -1,5 +1,5 @@
-import { Pipe, PipeListener } from "../plumbing";
-import { IPipeFitting, IPipeMessage, PipeMessageType } from "../index";
+import { Pipe, PipeListener } from "../plumbing/index.js";
+import { IPipeFitting, IPipeMessage, PipeMessageType } from "../index.js";
 
 /**
  * Test the PipeListener class.

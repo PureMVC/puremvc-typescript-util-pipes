@@ -2,8 +2,8 @@ import {
   PipeMessageType,
   FilterControlMessageType,
   QueueControlMessageType,
-} from "./enum";
-import { FilterControlFunction, PropBag } from "./pipe";
+} from "./enum.js";
+import { FilterControlFunction, PropBag } from "./pipe.js";
 
 /**
  * Pipe Message Interface.

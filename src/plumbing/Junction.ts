@@ -4,7 +4,7 @@ import {
   PipeListenerCallback,
   IPipeMessage,
   JunctionType,
-} from "../index";
+} from "../index.js";
 
 /**
  * Pipe Junction.

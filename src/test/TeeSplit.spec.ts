@@ -1,5 +1,5 @@
-import { Pipe, TeeSplit, PipeListener } from "../plumbing";
-import { IPipeFitting, IPipeMessage, PipeMessageType } from "../index";
+import { Pipe, TeeSplit, PipeListener } from "../plumbing/index.js";
+import { IPipeFitting, IPipeMessage, PipeMessageType } from "../index.js";
 
 describe("TeeSplit Test", () => {
   test("Connect and disconnect I/O pipes (LIFO disconnect)", () => {

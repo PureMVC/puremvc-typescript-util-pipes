@@ -1,4 +1,4 @@
-import { Filter, Pipe, PipeListener } from "../plumbing/";
+import { Filter, Pipe, PipeListener } from "../plumbing/index.js";
 import {
   IPipeMessage,
   PipeMessageType,
@@ -8,7 +8,7 @@ import {
   FilterControlMessage,
   FilterControlMessageType,
   QueueControlMessageType,
-} from "../index";
+} from "../index.js";
 
 let messagesReceived: IPipeMessage[];
 let callBackMethod: (message: IPipeMessage) => void;

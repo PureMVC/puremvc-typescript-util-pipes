@@ -8,7 +8,7 @@ import {
   JunctionType,
   IPipeFitting,
   IPipeMessage,
-} from "../index";
+} from "../index.js";
 
 /**
  * Junction Mediator.

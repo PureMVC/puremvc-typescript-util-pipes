@@ -1,4 +1,4 @@
-import { Pipe, IPipeFitting } from "../index";
+import { Pipe, IPipeFitting } from "../index.js";
 
 /**
  * Merging Pipe Tee.

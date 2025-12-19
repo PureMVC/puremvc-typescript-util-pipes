@@ -1,5 +1,5 @@
-import { IPipeMessage } from "../types/message";
-import { PipeMessageType } from "../types/enum";
+import { IPipeMessage } from "../types/message.js";
+import { PipeMessageType } from "../types/enum.js";
 
 /**
  * Test the Message shape (IPipeMessage).

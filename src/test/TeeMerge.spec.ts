@@ -1,5 +1,5 @@
-import { Pipe, TeeMerge, PipeListener } from "../plumbing";
-import { IPipeFitting, IPipeMessage, PipeMessageType } from "../index";
+import { Pipe, TeeMerge, PipeListener } from "../plumbing/index.js";
+import { IPipeFitting, IPipeMessage, PipeMessageType } from "../index.js";
 
 describe("TeeMerge Test", () => {
   test("Connect inputs and an output to TeeMerge", () => {

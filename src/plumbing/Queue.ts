@@ -1,7 +1,7 @@
-import { Pipe } from "./Pipe";
-import { IPipeFitting } from "../types/pipe";
-import { IPipeMessage } from "../types/message";
-import { PipeMessageType, QueueControlMessageType } from "../types/enum";
+import { Pipe } from "./Pipe.js";
+import { IPipeFitting } from "../types/pipe.js";
+import { IPipeMessage } from "../types/message.js";
+import { PipeMessageType, QueueControlMessageType } from "../types/enum.js";
 
 /**
  * Pipe Queue.

@@ -1,10 +1,10 @@
-import { Pipe, PipeListener, Junction } from "../plumbing";
+import { Pipe, PipeListener, Junction } from "../plumbing/index.js";
 import {
   IPipeFitting,
   IPipeMessage,
   PipeMessageType,
   JunctionType,
-} from "../index";
+} from "../index.js";
 
 describe("Junction Test", () => {
   test("Register, retrieve and remove INPUT pipe", () => {
