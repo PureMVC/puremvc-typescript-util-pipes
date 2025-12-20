@@ -16,7 +16,7 @@ npm install @puremvc/puremvc-typescript-multicore-framework
 npm install @puremvc/puremvc-typescript-util-pipes
 ```
 
-### Importing APIs
+### Imports (ESM) 
 
 ```ts
 import {
