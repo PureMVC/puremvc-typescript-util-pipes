@@ -18,7 +18,7 @@ export class TeeMerge extends Pipe {
    * Connect the single output fitting normally by calling the
    * `connect` method, as you would with any other IPipeFitting.
    */
-  constructor(input1: IPipeFitting, input2: IPipeFitting) {
+  constructor(input1?: IPipeFitting, input2?: IPipeFitting) {
     super();
     if (input1) this.connectInput(input1);
     if (input2) this.connectInput(input2);

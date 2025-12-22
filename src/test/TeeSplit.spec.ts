@@ -107,4 +107,60 @@ describe("TeeSplit Test", () => {
     expect(messagesReceived1[0]).toBe(message);
     expect(messagesReceived2[0]).toBe(message);
   });
+
+  test("Constructor allows zero outputs; can connect later", () => {
+    const messagesReceived1: IPipeMessage[] = [];
+    const messagesReceived2: IPipeMessage[] = [];
+
+    const input: IPipeFitting = new Pipe();
+    const out1: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived1.push(m)),
+    );
+    const out2: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived2.push(m)),
+    );
+
+    // Create TeeSplit with no constructor args
+    const teeSplit: TeeSplit = new TeeSplit();
+
+    // Connect outputs after construction
+    expect(teeSplit.connect(out1)).toBe(true);
+    expect(teeSplit.connect(out2)).toBe(true);
+
+    // Connect input
+    expect(input.connect(teeSplit)).toBe(true);
+
+    // Fan-out works as expected
+    const message: IPipeMessage = {
+      type: PipeMessageType.NORMAL,
+      header: { testProp: 2 },
+      body: { testAtt: "World" },
+    };
+    expect(input.write(message)).toBe(true);
+    expect(messagesReceived1.length).toBe(1);
+    expect(messagesReceived2.length).toBe(1);
+    expect(messagesReceived1[0]).toBe(message);
+    expect(messagesReceived2[0]).toBe(message);
+  });
+
+  test("Constructor allows a single optional output", () => {
+    const messagesReceived1: IPipeMessage[] = [];
+
+    const input: IPipeFitting = new Pipe();
+    const out1: IPipeFitting = new Pipe(
+      new PipeListener((m) => messagesReceived1.push(m)),
+    );
+
+    // Create TeeSplit with a single optional output
+    const teeSplit: TeeSplit = new TeeSplit(out1);
+
+    // Connect input
+    expect(input.connect(teeSplit)).toBe(true);
+
+    // Only the provided output should receive
+    const message: IPipeMessage = { type: PipeMessageType.NORMAL };
+    expect(input.write(message)).toBe(true);
+    expect(messagesReceived1.length).toBe(1);
+    expect(messagesReceived1[0]).toBe(message);
+  });
 });

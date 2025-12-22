@@ -2,6 +2,45 @@ import { Pipe, TeeMerge, PipeListener } from "../plumbing/index.js";
 import { IPipeFitting, IPipeMessage, PipeMessageType } from "../index.js";
 
 describe("TeeMerge Test", () => {
+  test("Construct TeeMerge with no constructor args and add inputs later", () => {
+    const messagesReceived: IPipeMessage[] = [];
+
+    const input1: IPipeFitting = new Pipe();
+    const input2: IPipeFitting = new Pipe();
+    const teeMerge: TeeMerge = new TeeMerge();
+
+    const connectedInput1 = teeMerge.connectInput(input1);
+    const connectedInput2 = teeMerge.connectInput(input2);
+
+    const connectedOutput = teeMerge.connect(
+      new PipeListener((m) => messagesReceived.push(m)),
+    );
+
+    const msg1: IPipeMessage = {
+      type: PipeMessageType.NORMAL,
+      header: { src: 1 },
+    };
+    const msg2: IPipeMessage = {
+      type: PipeMessageType.NORMAL,
+      header: { src: 2 },
+    };
+
+    const w1 = input1.write(msg1);
+    const w2 = input2.write(msg2);
+
+    expect(teeMerge).toBeInstanceOf(TeeMerge);
+    expect(connectedInput1).toBe(true);
+    expect(connectedInput2).toBe(true);
+    expect(connectedOutput).toBe(true);
+    expect(w1 && w2).toBe(true);
+
+    expect(messagesReceived.length).toBe(2);
+    const r1 = messagesReceived.shift() as IPipeMessage;
+    const r2 = messagesReceived.shift() as IPipeMessage;
+    expect(r1).toBe(msg1);
+    expect(r2).toBe(msg2);
+  });
+
   test("Connect inputs and an output to TeeMerge", () => {
     const output1: IPipeFitting = new Pipe();
     const pipe1: IPipeFitting = new Pipe();

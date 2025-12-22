@@ -1,12 +1,13 @@
 PureMVC Typescript/MultiCore Utility – Pipes
 --------------------------------------------------------------------------
-Release Date: 12/19/25
+Release Date: 12/22/25
     Platform: Typescript
      Version: 1
     Revision: 0
-       Patch: 3
+       Patch: 4
       Author:Cliff Hall <cliff.hall@puremvc.org>
 --------------------------------------------------------------------------
 1.0.0 - Initial port from AS3
 1.0.2 - Added DEV_GUIDE.md
 1.0.3 - Add .js to filenames imported and exported throughout the library.
+1.0.4 - Make args for TeeMerge and TeeSplit optional, with tests.

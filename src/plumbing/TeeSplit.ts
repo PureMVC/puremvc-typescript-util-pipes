@@ -15,7 +15,7 @@ export class TeeSplit implements IPipeFitting {
    * This is the most common configuration, though you can connect
    * as many outputs as necessary by calling `connect`.
    */
-  constructor(output1: IPipeFitting, output2: IPipeFitting) {
+  constructor(output1?: IPipeFitting, output2?: IPipeFitting) {
     if (output1) this.connect(output1);
     if (output2) this.connect(output2);
   }
