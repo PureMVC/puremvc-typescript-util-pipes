@@ -345,7 +345,7 @@ upstream.connect(split);
 - Use a `TeeMerge` to consolidate multiple inputs into one downstream output within a Core:
 
 ```ts
-const merged = new TeeMerge(new Pipe(), new Pipe());
+const merged = new TeeMerge();
 const sink   = new PipeListener((m) => console.log("got", m));
 merged.connect(sink);
 
